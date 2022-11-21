@@ -11,6 +11,11 @@ export default class BasePage {
     getDismissBtn(){
         return cy.get('.close-dialog')
     }
+
+    getToolBar(){
+        return cy.get('mat-toolbar')
+    }
+
      //Actions on elements
      clickAccountBtn(){
          cy.log('**Clicking account button**')
