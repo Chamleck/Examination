@@ -8,7 +8,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       config.defaultCommandTimeout = 10000
       config.pageLoadTimeout = 100000
-      config.baseUrl = 'http://juice-shop-sanitarskyi.herokuapp.com/#/'
+      config.baseUrl = 'http://juice-shop-sanitarskyi.herokuapp.com'
       // implement node event listeners here
     },
   },

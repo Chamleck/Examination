@@ -2,6 +2,7 @@
 import user from '../fixtures/user.json'
 import logInPage from '../support/pages/LogInPage';
 import mainPage from '../support/Pages/MainPage';
+import {loginViaAPI} from '../support/helper';
 
 let badCreds = {
     email: "11111",
@@ -10,12 +11,18 @@ let badCreds = {
 
 describe('Authorization', () => {
 
+    it('Login via api',()=>{
+        loginViaAPI(user);
+    })
+
     it('negative authorization',()=>{
         logInPage.openLogInPage();
         logInPage.closeDialog();
         logInPage.login(badCreds.email,badCreds.password);
         logInPage.getError().should('exist')
     });
+
+    it
 
     it('positive authorization',()=>{
         logInPage.openLogInPage();
