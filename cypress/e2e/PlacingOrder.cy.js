@@ -37,7 +37,7 @@ describe('Test of Placing an order', () => {
 
     it('adding product to basket, proceeding to order submit',()=>{
         cy.get(`mat-card`,{timeout:2000})
-        mainPage.addProductToChart('Apple Juice (1000ml)');
+        mainPage.addProductToChart('Banana Juice (1000ml)');
         cy.get('#checkoutButton',{timeout:2000});
         basketPage.clickCheckoutBtn();
     });

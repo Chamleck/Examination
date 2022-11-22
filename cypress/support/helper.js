@@ -10,11 +10,12 @@ export function loginViaAPI(user){
 
         // тут создаем переменную token которая получит значение из тела ответа в котором у юзера есть еще токен
                 let token = response.body.authentication.token;
+                
         // сетим этот токен в куки
                 cy.setCookie('token', token);
         // командой window обращаемся к localStorage, командой setItem в скобках указываем ключ и значение которое из джейсона преобразуем в строку
                 window.localStorage.setItem('token', JSON.stringify(token));
-                window.localStorage.setItem('token', JSON.stringify(user.email));
+                window.localStorage.setItem('email', JSON.stringify(user.email));
 
             })
     
