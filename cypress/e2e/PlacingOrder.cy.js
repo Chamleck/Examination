@@ -1,10 +1,11 @@
 ///<reference types="cypress"/>
 import basketPage from '../support/Pages/BasketPage';
 import adressPage from '../support/Pages/AdressPage';
-import logInPage from '../support/pages/LogInPage';
+import deliveryPage from '../support/pages/DeliveryPage';
+import paymentPage from '../support/Pages/PaymentPage';
 import mainPage from '../support/Pages/MainPage';
 import user from '../fixtures/user.json';
-import {loginViaAPI} from '../support/helper';
+import {loginViaAPI,login} from '../support/helper';
 import {faker} from '@faker-js/faker';
 
 
@@ -14,37 +15,42 @@ let form = {
     country: faker.address.country(),
     adress: faker.address.streetAddress(),
     city: faker.address.city(),
-    zip: faker.address.zipCode(),
+    zip: "12345",
     state: faker.animal.fish(),
-    number: faker.phone.number()
+    number: "2919299497",
+    card: {
+        card: "1231241252353467",
+        month: "7",
+        year: "2083"
+    }
   }
 
 describe('Test of Placing an order', () => {
 
     
     beforeEach(() => {
-        loginViaAPI(user);
+        cy.restoreLocalStorage()
     });
     
-
-    it('positive authorization',()=>{
-        logInPage.openLogInPage();
-        logInPage.closeDialog();
-        logInPage.login(user.email,user.password);
-        mainPage.getToolBar().should('contain', " Your Basket")
-        .then(()=>{expect(window.localStorage.getItem('token')).to.exist});
-    });
+    it('login',()=>{
+        login(user);
+    })
+    
 
     it('adding product to basket, proceeding to order submit',()=>{
-        cy.get(`mat-card`,{timeout:2000})
+        cy.get(`mat-card`,{timeout:2000});
         mainPage.addProductToChart('Banana Juice (1000ml)');
-        cy.get('#checkoutButton',{timeout:2000});
+        mainPage.getMessage().should('include.text', "Banana Juice (1000ml)")
+        cy.get('.cdk-row',{timeout:4000});
         basketPage.clickCheckoutBtn();
+        adressPage.submitAdressForm(form.country,form.name,form.number,form.zip,form.adress,form.city,form.state);
+        deliveryPage.proceedToPayment();
+        paymentPage.submitPaymentForm(form.name,form.card.card,form.card.month,form.card.year);
+        paymentPage.getConfirmation().should('include.text', "Your order will be delivered in 5 days.")
+        
     });
 
-    it('Adding adress if neccessary',()=>{
-        adressPage.submitAdressForm(form.country,form.name,form.number,form.zip,form.adress,form.city,form.state);
-    });
+
 
 
 

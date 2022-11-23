@@ -40,7 +40,7 @@ class AdressPage extends BasePage{
     }
 
     getRadioBtn(){
-        return cy.get('.mat-radio-inner-circle')
+        return cy.get('[class="mat-radio-outer-circle"]').eq(0)
     }
 
     getContinueBtn(){
@@ -60,13 +60,13 @@ class AdressPage extends BasePage{
     //Actions on elements
 
     submitAdressForm(country,name,number,zip,adress,city,state){
-
-        this.getBody().then(body => {
-            //якщо в боді знаходимо елемент який відповідає за потрібний товар, реалізується це за допомогою вкладенох+ї умови .length > 0 бо якщо 
-            //довжина цього елементу не нуль тобто таким чином можна зробити цей локатор булевим значенням якщо не 0 то це тру
-            if (body.find(this.getAdressBar()).length > 0) {
+        cy.wait(1000)
+        cy.exist('.mat-radio-outer-circle').then(exists => {
+            
+            if (exists) {
+                
                //тоді клікаємо по цьому товару
-               this.getRadioBtn().click();
+               this.getRadioBtn().click({force:true});
                this.getContinueBtn().click();
             } else {
                //в іншому випадку клікаємо на кнопку яка відповідає за перехід на наступну сторінку
@@ -87,7 +87,9 @@ class AdressPage extends BasePage{
                cy.log(`**Adding ${state} to state field**`);
                this.getStateField().type(state);
                cy.log(`**Submitting the form**`);
-               this.getSubmitBtn().click()
+               this.getSubmitBtn().click();
+               cy.log(`**Selecting payment method**`);
+               this.getRadioBtn().click({force:true});
                cy.log(`**Clicking continue btn**`)
                this.getContinueBtn().click()
                

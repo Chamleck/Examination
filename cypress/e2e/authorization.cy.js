@@ -11,11 +11,11 @@ let badCreds = {
 
 describe('Authorization', () => {
 
-    it('Login via api',()=>{
-        loginViaAPI(user);
+    it.only('Login via api',()=>{
+        loginViaAPI(user)
     })
 
-    it('negative authorization',()=>{
+    it.skip('negative authorization',()=>{
         logInPage.openLogInPage();
         logInPage.closeDialog();
         logInPage.login(badCreds.email,badCreds.password);
@@ -30,6 +30,7 @@ describe('Authorization', () => {
         logInPage.login(user.email,user.password);
         mainPage.getToolBar().should('contain', " Your Basket")
         .then(()=>{expect(window.localStorage.getItem('token')).to.exist});
+        cy.visit('http://juice-shop-sanitarskyi.herokuapp.com')
     });
 
 
