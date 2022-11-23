@@ -66,7 +66,9 @@ class AdressPage extends BasePage{
             if (exists) {
                 
                //тоді клікаємо по цьому товару
+               cy.log(`**Selecting payment method**`);
                this.getRadioBtn().click({force:true});
+               cy.log(`**Clicking continue btn**`)
                this.getContinueBtn().click();
             } else {
                //в іншому випадку клікаємо на кнопку яка відповідає за перехід на наступну сторінку
