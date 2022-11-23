@@ -1,4 +1,5 @@
 import logInPage from '../support/Pages/LogInPage'
+import mainPage from'../support/Pages/MainPage'
 
 
 
@@ -32,5 +33,11 @@ export function loginViaAPI(user){
 
             })
             cy.saveLocalStorage(localStorage);        
+    
+}
+
+export function productSearch(product){
+
+    mainPage.performSearch(product);
     
 }

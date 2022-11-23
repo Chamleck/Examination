@@ -16,6 +16,10 @@ export default class BasePage {
         return cy.get('mat-toolbar')
     }
 
+    getSearch(){
+        return cy.get('mat-icon:contains("search")')
+    }
+
      //Actions on elements
      clickAccountBtn(){
          cy.log('**Clicking account button**')
@@ -30,6 +34,11 @@ export default class BasePage {
     closeDialog(){
         cy.log('**Closing diolog window**')
         this.getDismissBtn().click()
+    }
+
+    performSearch(product){
+        cy.log('**Typing ${product} in search**');
+        this.getSearch().type(`${product}{enter}`);
     }
  
  
