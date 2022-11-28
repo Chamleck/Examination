@@ -18,7 +18,7 @@ class DeliveryPage extends BasePage{
     //Actions on elements
 
     proceedToPayment(){
-        cy.log(`**Clicking radio btn**`)
+        cy.log(`**Clicking radio btn**`);
         this.getRadioBtn().click({force:true});
         cy.log(`**Clicking continue btn**`);
         this.getContinueBtn().click();

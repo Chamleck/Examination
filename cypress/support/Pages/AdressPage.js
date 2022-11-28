@@ -36,23 +36,23 @@ class AdressPage extends BasePage{
     }
 
     getSubmitBtn(){
-        return cy.get('#submitButton')
+        return cy.get('#submitButton');
     }
 
     getRadioBtn(){
-        return cy.get('[class="mat-radio-outer-circle"]').eq(0)
+        return cy.get('[class="mat-radio-outer-circle"]').eq(0);
     }
 
     getContinueBtn(){
-        return cy.get('[aria-label="Proceed to payment selection"]')
+        return cy.get('[aria-label="Proceed to payment selection"]');
     }
 
     getBody(){
-        return cy.get('body')
+        return cy.get('body');
     }
 
     getAdressBar(){
-        return cy.get('mat-row.mat-row')
+        return cy.get('mat-row.mat-row');
     }
 
     
@@ -60,7 +60,7 @@ class AdressPage extends BasePage{
     //Actions on elements
 
     submitAdressForm(country,name,number,zip,adress,city,state){
-        cy.wait(1000)
+        cy.wait(1000);
         cy.exist('.mat-radio-outer-circle').then(exists => {
             
             if (exists) {
@@ -83,15 +83,15 @@ class AdressPage extends BasePage{
                cy.log(`**Adding ${adress} to adress field**`);
                this.getAdressField().type(adress);
                cy.log(`**Adding ${city} to city field**`);
-               this.getCityField().type(city)
+               this.getCityField().type(city);
                cy.log(`**Adding ${state} to state field**`);
                this.getStateField().type(state);
                cy.log(`**Submitting the form**`);
                this.getSubmitBtn().click();
                cy.log(`**Selecting payment method**`);
                this.getRadioBtn().click({force:true});
-               cy.log(`**Clicking continue btn**`)
-               this.getContinueBtn().click()
+               cy.log(`**Clicking continue btn**`);
+               this.getContinueBtn().click();
                
                
                

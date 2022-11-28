@@ -6,27 +6,27 @@ class LogInPage extends BasePage{
         cy.visit('http://juice-shop-sanitarskyi.herokuapp.com/#/login')
     }
     getRegistrationBtn(){
-        return cy.get('[href="#/register"]')
+        return cy.get('[href="#/register"]');
     }
 
     getEmailField(){
-        return cy.get('#email')
+        return cy.get('#email');
     }
 
     getPasswordField(){
-        return cy.get('#password')
+        return cy.get('#password');
     }
 
     getCheckbox(){
-        return cy.get('.mat-checkbox-inner-container')
+        return cy.get('.mat-checkbox-inner-container');
     }
 
     getLogInBtn(){
-        return cy.get('#loginButton')
+        return cy.get('#loginButton');
     }
 
     getError(){
-        return cy.get('.error')
+        return cy.get('.error');
     }
 
     
@@ -34,19 +34,19 @@ class LogInPage extends BasePage{
     //Actions on elements
 
     clickRegistrationBtn(){
-        cy.log('**Clicking on Registration button**')
-        this.getRegistrationBtn().click()
+        cy.log('**Clicking on Registration button**');
+        this.getRegistrationBtn().click();
     }
 
     login(email,password){
-        cy.log(`**Adding ${email} to email field**`)
-        this.getEmailField().type(email)
-        cy.log(`**Adding ${password} to password field**`)
-        this.getPasswordField().type(password)
-        cy.log(`**activating checkbox**`)
-        this.getCheckbox().click()
-        cy.log(`**pushing Login button**`)
-        this.getLogInBtn().click()
+        cy.log(`**Adding ${email} to email field**`);
+        this.getEmailField().type(email);
+        cy.log(`**Adding ${password} to password field**`);
+        this.getPasswordField().type(password);
+        cy.log(`**activating checkbox**`);
+        this.getCheckbox().click();
+        cy.log(`**pushing Login button**`);
+        this.getLogInBtn().click();
     }
 
     

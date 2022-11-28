@@ -29,7 +29,7 @@ describe('Test of Placing an order', () => {
 
     
     beforeEach(() => {
-        cy.restoreLocalStorage()
+        cy.restoreLocalStorage();
     });
     
     it('login',()=>{
@@ -46,7 +46,7 @@ describe('Test of Placing an order', () => {
         adressPage.submitAdressForm(form.country,form.name,form.number,form.zip,form.adress,form.city,form.state);
         deliveryPage.proceedToPayment();
         paymentPage.submitPaymentForm(form.name,form.card.card,form.card.month,form.card.year);
-        paymentPage.getConfirmation().should('include.text', "Your order will be delivered in 5 days.")
+        paymentPage.getConfirmation().should('include.text', "Your order will be delivered in 5 days.");
         
     });
 

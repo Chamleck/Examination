@@ -29,7 +29,7 @@ describe('Test of Placing an with help of search func', () => {
 
     
     beforeEach(() => {
-        cy.restoreLocalStorage()
+        cy.restoreLocalStorage();
     });
     
     it('login',()=>{
@@ -41,13 +41,13 @@ describe('Test of Placing an with help of search func', () => {
         productSearch('Banana');
         cy.get(`mat-card`,{timeout:2000});
         mainPage.addProductToChart('Banana Juice (1000ml)');
-        mainPage.getMessage().should('include.text', "Banana Juice (1000ml)")
+        mainPage.getMessage().should('include.text', "Banana Juice (1000ml)");
         cy.get('.cdk-row',{timeout:4000});
         basketPage.clickCheckoutBtn();
         adressPage.submitAdressForm(form.country,form.name,form.number,form.zip,form.adress,form.city,form.state);
         deliveryPage.proceedToPayment();
         paymentPage.submitPaymentForm(form.name,form.card.card,form.card.month,form.card.year);
-        paymentPage.getConfirmation().should('include.text', "Your order will be delivered in 5 days.")
+        paymentPage.getConfirmation().should('include.text', "Your order will be delivered in 5 days.");
         
     });
 

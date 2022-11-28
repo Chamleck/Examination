@@ -3,7 +3,7 @@ import BasePage from "./BasePage";
 class MainPage extends BasePage{
     getProduct(productName){
         return cy.get(`mat-card:contains(${productName})`)
-        .find('.mat-button-wrapper')
+        .find('.mat-button-wrapper');
         
     }
 
@@ -12,7 +12,7 @@ class MainPage extends BasePage{
     }
 
     getMessage(){
-        return cy.get('.mat-simple-snack-bar-content')
+        return cy.get('.mat-simple-snack-bar-content');
     }
 
     addProductToChart(productName){

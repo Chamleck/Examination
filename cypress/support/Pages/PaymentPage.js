@@ -7,23 +7,23 @@ class PaymentPage extends BasePage{
     }
     
     getNameField(){
-        return cy.get('#mat-input-3');
+        return cy.get('[aria-required="true"]').eq(0);
     }
 
     getCardField(){
-        return cy.get('#mat-input-4');
+        return cy.get('[aria-required="true"]').eq(1);
     }
 
     getMonthSelect(){
-        return cy.get('#mat-input-5');
+        return cy.get('[aria-required="true"]').eq(2);
     }
 
     getExpireYearSelect(){
-        return cy.get('#mat-input-6');
+        return cy.get('[aria-required="true"]').eq(3);
     }
 
     getSubmitBtn(){
-        return cy.get('#submitButton')
+        return cy.get('#submitButton');
     }
 
     getRadioBtn(){
@@ -51,25 +51,25 @@ class PaymentPage extends BasePage{
     //Actions on elements
 
     submitPaymentForm(name,card,month,year){
-        cy.wait(1000)
+        cy.wait(1000);
         cy.exist('.mat-radio-outer-circle').then(exists => {
             
             if (exists) {
-            cy.log(`**clicking radio btn**`)
+            cy.log(`**clicking radio btn**`);
             this.getRadioBtn().click({force:true});
-            cy.log(`**Clicking continue btn**`)
+            cy.log(`**Clicking continue btn**`);
             this.getContinueBtn().click();
-            cy.log(`**Clicking checkout btn**`)
+            cy.log(`**Clicking checkout btn**`);
             this.getCheckoutBtn().click();
 
 
             } else {
 
-        cy.log(`**opening dropdown**`)
+        cy.log(`**opening dropdown**`);
         this.getDropdownTriger().click();
-        cy.log(`**Typing ${name} in name field**`)
-        this.getNameField().type(name)
-        cy.log(`**Typing ${card} in card field**`)
+        cy.log(`**Typing ${name} in name field**`);
+        this.getNameField().type(name);
+        cy.log(`**Typing ${card} in card field**`);
         this.getCardField().type(card);
         cy.log(`**selecting ${month} in month selector**`)
         this.getMonthSelect().select(month);
@@ -79,11 +79,11 @@ class PaymentPage extends BasePage{
         this.getSubmitBtn().click();
         cy.log(`**Assertion that payment method added**`);
         this.getMessage().should('include.text', "3467");
-        cy.log(`**clicking radio btn**`)
+        cy.log(`**clicking radio btn**`);
         this.getRadioBtn().click({force:true});
-        cy.log(`**Clicking continue btn**`)
+        cy.log(`**Clicking continue btn**`);
         this.getContinueBtn().click();
-        cy.log(`**Clicking checkout btn**`)
+        cy.log(`**Clicking checkout btn**`);
         this.getCheckoutBtn().click();
 
 

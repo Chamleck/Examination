@@ -31,7 +31,7 @@ describe('Registration test', () => {
     cy.get('[href="#/register"]',{timeout:2000})
     cy.location().then(location=>{
       //перевірка локейшн (урл)
-      expect(location.href).to.eq('http://juice-shop-sanitarskyi.herokuapp.com/#/login')
+      expect(location.href).to.eq('http://juice-shop-sanitarskyi.herokuapp.com/#/login');
   })
   })
 })

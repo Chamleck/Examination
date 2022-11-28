@@ -32,7 +32,7 @@ class FormPage extends BasePage{
     getCaptchaCode(){
         return cy.get('code').then(($code)=>{
             //за допомогою команди .text() отримуємо текст з тегу, який під аліас $code
-             return $code.text()
+             return $code.text();
         })
     }
 
@@ -49,7 +49,7 @@ class FormPage extends BasePage{
     //Actions on elements
 
     submitForm(comment){
-        cy.log('**opening form page**')
+        cy.log('**opening form page**');
         this.openForm();
         cy.log('**Closing diolog window**')
         this.getDismissBtn().click();
@@ -61,13 +61,12 @@ class FormPage extends BasePage{
         //тут резолв промісу буде result
         this.getCaptchaCode().then(result => {
              cy.window().then((w) => {
+                //команда eval підраховує те що міститься в result, тобто капча код
                 const sum = w.eval(result);
-                cy.log('**entering result to resi+ult field**');
+                cy.log('**entering result to result field**');
                 this.getResultField().type(sum);
                 cy.log('**submitting the form**');
                 this.getSubmitBtn().click();
-
-
               })
           })
        
