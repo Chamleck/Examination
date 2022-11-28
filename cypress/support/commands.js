@@ -23,3 +23,50 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+const LOCAL_STORAGE_MEMORY = {};
+
+function localStorageRestore() {
+
+    Object.keys(LOCAL_STORAGE_MEMORY).forEach((key) => {
+        localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
+    });
+}
+
+Cypress.Commands.add("saveLocalStorage", (localStorage) => {
+    Object.keys(localStorage).forEach((key) => {
+        LOCAL_STORAGE_MEMORY[key] = localStorage[key];
+    });
+});
+
+Cypress.Commands.add('restoreLocalStorage', () => {
+    Object.keys(LOCAL_STORAGE_MEMORY).forEach((key) => {
+        localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
+    });
+});
+
+Cypress.on('window:before:load', () => {
+    localStorageRestore();
+});
+
+Cypress.on('url:changed', () => {
+    localStorageRestore();
+});
+
+Cypress.on('before:url:changed', () => {
+    localStorageRestore();
+});
+
+Cypress.Commands.add("exist", (selector) => {
+    cy.get('body').should('exist').then(($body) => {
+      return new Cypress.Promise((resolve, reject) => {
+        if ($body.find(selector).length > 0) {
+          console.log("cy.exist() - Matching element found in DOM!");
+          resolve(true);
+        } else {
+          console.log("cy.exist() - Element did not exist!");
+          resolve(false);
+        }
+      })
+    })
+  })
